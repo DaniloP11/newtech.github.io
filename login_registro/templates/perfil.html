@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylelogin.css') }}">
+    <title>Mi Perfil</title>
+    <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/static/css/styles.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylest1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylelogin.css') }}">
+</head>
+
+<body>
+    
+   
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg" style="background-color: var(--navbar-bg, #000); color: var(--navbar-text, #fff);">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="/" style="color: inherit; font-size: 30px;">NewTech</a>
+        </div>
+    </nav>
+
+
+    <section class="form-register" style="background-color: rgb(30, 30, 34);">
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category,message in
+            messages %}
+        <div class="alert alert-{{category}}">{{message}}</div>
+        {% endfor %} {% endif %} {% endwith %}
+        <h2 style="color: white; text-align: center;">Mi Perfil</h2><br>
+        <form action="/actualizar_perfil" method="POST">
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <input class="form-control rounded-pill" type="text" name="nombres" id="nombres" placeholder="{{ session['nombres'] }}" required>
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="col-md-6 mb-3">
+                    <input class="form-control rounded-pill" type="text" name="apellidos" id="apellidos" placeholder="{{ session['apellidos'] }}" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <input class="form-control rounded-pill" type="text" name="celular" id="celular" placeholder="{{ session['celular'] }}" required>
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="col-md-6 mb-3">
+                    <input class="form-control rounded-pill" type="email" name="email" id="email" placeholder="{{ session['email'] }}" required>
+                </div>
+            </div>
+            <div class="form-row">                
+                    <input class="form-control rounded-pill" type="password" name="current_password" id="current_password" placeholder="Contraseña actual" required>
+            </div><br>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <input class="form-control rounded-pill" type="password" name="password" id="password" placeholder="Nueva Contraseña">
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="col-md-6 mb-3">
+                    <input class="form-control rounded-pill" type="password" name="confirm_password" id="confirm_password" placeholder="Confirmar Contraseña">
+                </div>
+            </div>
+            <center>
+                <div class="col-md-6 mb-3">
+                    <button class="btn btn-primary btn-xl rounded-pill" type="submit">Actualizar Perfil</button>
+                </div>
+            </center>
+        </form>
+        <p style="text-align: center; color: white;"><a href="/" style="color: white;">Volver a Inicio</a></p>
+    </section>
+    <br>
+</body>
+
+</html>

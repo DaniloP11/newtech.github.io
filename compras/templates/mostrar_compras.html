@@ -1,0 +1,75 @@
+
+
+
+{% extends "base.html"%}
+{% block title %}Catalogo de productos{% endblock %}
+<!-- Section-->
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category,message in messages %}
+            <div class="alert alert-{{category}}">{{message}}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<!-- Contact-->
+<section class="page-section" id="contact">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 col-xl-6 text-center">
+                <h2 class="mt-0">Información sobre sus compras</h2>
+                <hr class="divider" />
+            </div>
+        </div>
+    </div>
+</section>
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">Compras Registradas en tu cuenta</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">NewTech</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i> Compras
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
+                            <tr>
+                                <th>Factura</th>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio(total)</th>
+                                <th>Fecha</th>
+                                <th>Descripción</th>
+                                <th>Categoria</th>
+                                <th>Dirección</th>
+                                <th>Método de Pago</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for info in compras_user %}
+                                <tr>
+                                    <td>{{info[0]}}</td>
+                                    <td>{{info[7]}}</td>
+                                    <td>{{info[2]}}</td>
+                                    <td>{{info[3]}}</td>
+                                    <td>{{info[4]}}</td>
+                                    <td>{{info[8]}}</td>
+                                    <td>{{info[9]}}</td>
+                                    <td>{{info[5]}}</td>
+                                    <td>{{info[6]}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+{% endblock %}

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Gestión de Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link href="/static/css/stylesa.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</head>
+
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="/admin">NewTech</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+                class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                    <li><a class="dropdown-item" href="/logout">Salir</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Administración</div>
+                        <a class="nav-link" href="/admin">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Gestión de usuarios
+                        </a>
+
+                        <a class="nav-link" href="/productos_admin/laptops">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Productos
+                        </a>
+                        <a class="nav-link" href="/ver_compras" >
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Ver compras
+                        </a>
+                        <hr>
+                        <a class="nav-link" href="/logout" onclick="return confirm('¿Seguro quieres salir?')"><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Cerrar Sesión</a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    Administrador
+                </div>
+            </nav>
+        </div>
+
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Gestión de productos</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="/admin">Administración</a></li>
+                        <li class="breadcrumb-item active">Productos</li>
+                        <li class="breadcrumb-item"><a href="/productos_admin/laptops">Laptos Gamer</a></li>
+                        <li class="breadcrumb-item"><a href="/productos_admin/pcescritorio">Computadores de escritorio</a></li>
+                        <li class="breadcrumb-item"><a href="/productos_admin/celulares">Celulares</a></li>
+                        <li class="breadcrumb-item"><a href="/productos_admin/consolas">Consola de Videojuego</a></li>
+                        <li class="breadcrumb-item"><a href="/productos_admin/relojs">Relojs Inteligentes</a></li>
+                        <li class="breadcrumb-item"><a href="/productos_admin/accesorios">Articulos</a></li>
+
+                    </ol>
+                    <section class="py-5">
+                        {% with messages = get_flashed_messages(with_categories=true) %} {% if messages
+                        %} {% for
+                        category,message in
+                        messages %}
+                        <div class="alert alert-{{category}}">{{message}}</div>
+                        {% endfor %} {% endif %} {% endwith %}
+                        <div class="container px-4 px-lg-5 my-5">
+                            <div class="row gx-4 gx-lg-5 align-items-center">
+
+                                <div class="d-flex">
+                                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{producto[4]}}"
+                                            alt="..." /></div>
+
+                                    <form action="{{url_for('administrador.editar')}}" method="post"
+                                        enctype="multipart/form-data">
+                                        <div class="small mb-1">ID: {{producto[0]}} / {{producto[6]}} </div>
+                                        <input name="productId" value="{{producto[0]}}" hidden />
+                                        <input name="categoria" value="{{producto[6]}}" hidden />
+
+                                        <div>
+
+                                            <h6 class=" fw-bolder">Nombre</h6>
+                                            <input class="form-control text-center me-3" id="nombre" name="nombre"
+                                                type="text" value="{{producto[1]}}" required style="max-width: 10rem" />
+                                            <h6 class=" fw-bolder">Valor Unitario: $</h6>
+                                            <input class="form-control text-center me-3" id="precio" name="precio"
+                                                type="text" value="{{producto[2]}}" required style="max-width: 10rem" />
+                                            <h6 class=" fw-bolder">Cantidad disponible:</h6>
+                                            <input class="form-control text-center me-3" id="cantidad" name="cantidad"
+                                                type="text" value="{{producto[5]}}" required style="max-width: 10rem" />
+                                            <h6 class=" fw-bolder">Descripción</h6>
+                                            <textarea name="descripcion" rows=3 cols="40"
+                                                required>{{producto[3]}}</textarea>
+
+                                            <hr>
+                                            <h6 class="fw-bolder">Escriba la URL de la imagen o seleccione una</h6>
+                                            <input class="form-control text-center me-3" id="imagen" name="imagen"
+                                                type="text" value="{{producto[4]}}" style="max-width: 30rem" />
+
+
+
+                                        </div>
+                                        <input class="form-control text-center me-3" id="imagen2" name="imagen2"
+                                            type="file" value="{{producto[4]}}" style="max-width: 20rem" />
+                                        <br>
+                                        <button class="btn btn-outline-dark btn-success flex-shrink-0" type="submit">
+                                            <i class="bi-cart-fill me-1"></i>
+                                            Editar campos
+                                        </button>
+                                    </form>
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright © 2023 - NewTech</div>
+                        <div>
+                            <a href="#">Política de privacidad</a> &middot;
+                            <a href="#">Terminos y condiciones</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="/static/js/scriptsa.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+    <script src="/static/js/datatables-simple-demo.js"></script>
+</body>
+
+</html>

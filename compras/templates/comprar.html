@@ -1,0 +1,61 @@
+{% extends "base.html"%} {% block title %}Catalogo de productos{% endblock %}
+<!-- Section-->
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category,message in
+messages %}
+<div class="alert alert-{{category}}">{{message}}</div>
+
+{% endfor %} {% endif %} {% endwith %}
+
+<!-- Contact-->
+<section class="page-section" id="contact">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 col-xl-6 text-center">
+                <h2 class="mt-0">Metodo de pago contraentrega</h2>
+                <hr class="divider" />
+                <p class="text-muted mb-5">¡Por favor digita tu dirección de residencia para proceder a realizar el envío de tu producto.!</p>
+            </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+            <div class="col-lg-6">
+                
+                <form id="contactForm" data-sb-form-api-token="API_TOKEN" action="{{url_for('compras.registrar_compra')}}" method="POST">
+                    <!-- Name input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="direccion" name="direccion" type="text" placeholder="Enter your direction..."
+                            data-sb-validations="required" required/>
+                        <label for="direccion">Dirección de residencia</label>
+                        <div class="invalid-feedback" data-sb-feedback="direccion:required">Este campo es obligatorio.
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select id="pago" name="pago" class="form-control" required>
+                            <option value="efectivo">Pago contraentrega</option>
+                        </select><br>
+                        
+                        <label for="pago">Elija Método de pago</label>
+                        <div class="invalid-feedback" data-sb-feedback="pago:required">Este campo es obligatorio.
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <!-- Submit Button-->
+                    <div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton"
+                            type="submit">Enviar</button></div>
+                </form>
+            </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-4 text-center mb-5 mb-lg-0">
+                <i class="bi-phone fs-2 mb-3 text-muted"></i>
+                <div>+57 (310) 4259105 </div>Contáctanos
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+
+{% endblock %}

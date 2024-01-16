@@ -1,0 +1,70 @@
+#center-container {
+    text-align: center;
+}
+a {
+    text-decoration: none;
+}
+
+#tableItems {
+    margin: 20px auto; /* Ajuste los márgenes según sea necesario */
+    max-width: 400px; /* Ajuste según sea necesario */
+}
+
+#itemImage,
+#itemName,
+#itemPrice {
+    margin: 5px;
+}
+
+#itemImage {
+    float: none; /* Eliminar el flotador para centrar verticalmente */
+    display: inline-block; /* Permitir que los elementos se alineen horizontalmente */
+}
+
+#itemName {
+    width: auto; /* Ajuste según sea necesario */
+    float: none;
+}
+
+#titleName {
+    width: auto;
+    float: none;
+}
+
+#titlePrice {
+    float: none;
+}
+
+#itemPrice {
+    display: inline-block;
+}
+
+#seperator {
+    margin: 0;
+    max-width: 100%; /* Ajuste según sea necesario */
+}
+
+#total {
+    padding-left: 0; /* Ajuste según sea necesario */
+}
+
+#itemNameTag {
+    font-weight: bold;
+}
+
+#subtotal {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#itemImage {
+    margin: 5px;
+    float: left;
+}
+
+#image {
+    max-height: 100px;  /* Establece una altura máxima para la imagen */
+    max-width: 100%;    /* Ajusta el ancho máximo para mantener la proporción */
+    height: auto;       /* Permite que la altura se ajuste automáticamente */
+    width: auto;        /* Permite que el ancho se ajuste automáticamente */
+}

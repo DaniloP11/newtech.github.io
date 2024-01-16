@@ -1,0 +1,74 @@
+{% extends "base.html"%} {% block title %}Catalogo de productos{% endblock %}
+<!-- Section-->
+{% block content %}
+
+<section class="py-5">
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category,message in
+    messages %}
+    <div class="alert alert-{{category}}">{{message}}</div>
+    {% endfor %} {% endif %} {% endwith %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            
+            {% for pag in range(1,num_paginas+1) %}
+            <li class="page-item">
+                {% if categoria=='laptops' %}
+                <a class="page-link" href="{{url_for('productos.laptops', pagina=pag)}}">{{ pag }}</a>
+                {% elif categoria=='pcescritorio' %}
+                <a class="page-link" href="{{url_for('productos.pcescritorio', pagina=pag)}}">{{ pag }}</a>
+                {% elif categoria=='celulares' %}
+                <a class="page-link" href="{{url_for('productos.celulares', pagina=pag)}}">{{ pag }}</a>
+                {% elif categoria=='Juguetes' %}
+                <a class="page-link" href="{{url_for('productos.juguetes', pagina=pag)}}">{{ pag }}</a>
+                {% elif categoria=='consolas' %}
+                <a class="page-link" href="{{url_for('productos.consolas', pagina=pag)}}">{{ pag }}</a>
+                {% elif categoria=='accesorios' %}
+                <a class="page-link" href="{{url_for('productos.accesorios', pagina=pag)}}">{{ pag }}</a>
+                {% endif %}
+            </li>
+            {% endfor %}
+
+        </ul>
+    </nav>
+    <div class="container px-4 px-lg-5 ">
+        <div class="text-center">
+            <h2>Sección de {{categoria}}</h2>
+        </div>
+        <br>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+
+            {% for producto in datos_categoria %}
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" src="{{producto[4]}}" alt="..." />
+                    <!-- Product details-->
+
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">{{producto[1]}}</h5>
+                            <h6>{{producto[3]}}</h6>
+
+                            <!-- Product price-->
+                            $ {{producto[2]}}
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <form action="/agregar" method="post"></form>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                                href="/detalles?productId={{producto[0]}}">Añadir al carrito</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

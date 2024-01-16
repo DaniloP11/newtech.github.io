@@ -1,0 +1,60 @@
+{% extends "base.html"%} {% block title %}Catalogo de productos{% endblock %}
+<!-- Section-->
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category,message in
+messages %}
+<div class="alert alert-{{category}}">{{message}}</div>
+
+{% endfor %} {% endif %} {% endwith %}
+<!-- Contact-->
+<section class="page-section" id="contact">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 col-xl-6 text-center">
+                <h2 class="mt-0">Información sobre su compra</h2>
+                <hr class="divider" />
+                <p class="text-muted mb-5">Factura No. {{datos_cliente[7]}} <br>
+                    Fecha: {{datos_cliente[5]}}<br>
+                    Dirección: {{datos_cliente[3]}}<br>
+                    e-mail: {{datos_cliente[2]}}<br>
+                    Celular: {{datos_cliente[1]}}<br>
+                    Cliente: {{datos_cliente[0]}}</p>
+                <!-- <p class="text-muted mb-5">Cliente: {{datos_cliente[0]}}</p> -->
+            </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+            <div class="col-lg-6">
+
+                <div id="">
+                    <h2>NewTech</h2>
+                    <div id="">
+                        {% for row in productos %}
+                        <div>
+                            <hr id="">
+
+                            <div id="">
+                                <h5 id="">{{row[2]}}</h5><br>
+                                Categoria {{row[7]}} <br>
+                                {{row[8]}} <br>
+                                Cantidad : {{row[5]}}<br>
+                            </div>
+                            <div id="">
+                                ${{row[6]}}
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <hr>
+                        <div id="total">Método de pago: <br>
+                        {{datos_cliente[4]}} <br>
+                            <span id="subtotal">Total:</span> ${{datos_cliente[6]}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
